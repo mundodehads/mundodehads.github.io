@@ -136,7 +136,9 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 24px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px dotted #303030;
 }
 
 .blog a {
@@ -181,6 +183,8 @@ footer {
   margin-top: auto;
   text-align: center;
   vertical-align: middle;
+  margin-top: 40px;
+  margin-bottom: 20px;
 }
 
 .ball-align {
@@ -190,25 +194,31 @@ footer {
   justify-content: center;
   text-align: center;
 }
+
 .balls {
   border-radius: 50%;
   width: 10px;
   height: 10px;
 }
 
-#blue-ball {
-  background: darkgr;
+.tags {
+  display: flex;
+  flex-wrap: wrap;
 }
 
-#yellow-ball {
-  background: vio;
+.tag {
+  background: #303030;
+  border: none;
+  border-radius: 3px;
+  color: #fefefe;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 12px;
+  margin-left: 8px;
+  margin-bottom: 8px;
 }
 
-#orange-ball {
-  background: orange;
+.clear {
+  background-color: red;
+  color: white !important;
 }
-
-#default-ball {
-  background: #00F3FE;
-}
-
