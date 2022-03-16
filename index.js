@@ -30,7 +30,7 @@ function onTagClick(tag) {
 const showTagList = (tagsList) => {
   const tags = document.getElementById('tags');
   for (let tag of tagsList) {
-    tags.innerHTML += `<a onclick="onTagClick(\'${tag}\')" class="tag js" style="background: ${languages[tag.toLowerCase()] || languages.default}; color: ${tag.toLowerCase() === 'javascript' ? 'black' : 'white'}">${tag}</a>`;
+    tags.innerHTML += `<a onclick="onTagClick(\'${tag}\')" class="tag" style="background: ${languages[tag.toLowerCase()] || languages.default}; color: ${tag.toLowerCase() === 'javascript' ? 'black' : 'white'}">${tag}</a>`;
   }
 }
 

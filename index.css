@@ -136,8 +136,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding: 12px 6px 12px 6px;
   border-bottom: 1px dotted #303030;
 }
 
@@ -221,4 +220,42 @@ footer {
 .clear {
   background-color: red;
   color: white !important;
+}
+
+.projects-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.projects {
+  display: flex;
+  flex-direction: column;
+}
+
+.project {
+  font-size: 24px;
+  padding: 6px;
+}
+
+.projects a {
+  color: #00a8b1;
+  text-decoration: none;
+}
+
+.projects a:hover {
+  color: #00F3FE;
+  background-color: #303030;
+  border-radius:5px;
+  text-decoration:none;
+  cursor:pointer;
+}
+
+.blog-post:hover {
+  background-color: #303030;
+  border-radius:5px;
+}
+
+.tags a:hover {
+  cursor:pointer;
 }
