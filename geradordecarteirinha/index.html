@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Crop - Certificate Generator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 20px;
+        background-color: #f0f0f0;
+      }
+
+      h1 {
+        margin-bottom: 20px;
+      }
+
+      #drop-area {
+        border: 2px dashed #aaa;
+        border-radius: 10px;
+        width: 400px;
+        height: 300px;
+        line-height: 300px;
+        color: #aaa;
+        margin: 0 auto;
+        cursor: pointer;
+        background-color: white;
+      }
+
+      #drop-area.hover {
+        border-color: #333;
+        color: #333;
+      }
+
+      #image-container {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+      }
+
+      canvas {
+        border: 1px solid #333;
+        max-width: 90%;
+      }
+
+      #generate-btn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Image Crop - Certificate Generator</h1>
+    <div id="drop-area">Drag your image here</div>
+    <div id="image-container">
+      <canvas id="image-canvas"></canvas>
+    </div>
+    <button id="generate-btn" style="display: none">
+      Generate Certificate
+    </button>
+
+    <script>
+      const dropArea = document.getElementById("drop-area");
+      const canvas = document.getElementById("image-canvas");
+      const ctx = canvas.getContext("2d");
+      const generateBtn = document.getElementById("generate-btn");
+
+      let image = new Image();
+      let startX,
+        startY,
+        endX,
+        endY,
+        isDragging = false;
+
+      let crop = { x: 0, y: 0, width: 0, height: 0 };
+
+      dropArea.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        dropArea.classList.add("hover");
+      });
+
+      dropArea.addEventListener("dragleave", () => {
+        dropArea.classList.remove("hover");
+      });
+
+      dropArea.addEventListener("drop", (e) => {
+        e.preventDefault();
+        dropArea.classList.remove("hover");
+
+        const file = e.dataTransfer.files[0];
+        if (!file.type.startsWith("image/")) return;
+
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          image.onload = () => {
+            canvas.width = image.width;
+            canvas.height = image.height;
+            ctx.drawImage(image, 0, 0);
+          };
+          image.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+
+      canvas.addEventListener("mousedown", (e) => {
+        const rect = canvas.getBoundingClientRect();
+        startX = e.clientX - rect.left;
+        startY = e.clientY - rect.top;
+        isDragging = true;
+      });
+
+      canvas.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+        const rect = canvas.getBoundingClientRect();
+        endX = e.clientX - rect.left;
+        endY = e.clientY - rect.top;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(image, 0, 0);
+
+        const width = endX - startX;
+        const height = endY - startY;
+
+        ctx.strokeStyle = "red";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(startX, startY, width, height);
+      });
+
+      canvas.addEventListener("mouseup", () => {
+        isDragging = false;
+        crop.x = Math.min(startX, endX);
+        crop.y = Math.min(startY, endY);
+        crop.width = Math.abs(endX - startX);
+        crop.height = Math.abs(endY - startY);
+        generateBtn.style.display = "inline-block";
+      });
+
+      generateBtn.addEventListener("click", () => {
+        const croppedCanvas = document.createElement("canvas");
+        croppedCanvas.width = crop.width;
+        croppedCanvas.height = crop.height;
+        const croppedCtx = croppedCanvas.getContext("2d");
+
+        // Recortar a imagem selecionada
+        croppedCtx.drawImage(
+          canvas,
+          crop.x,
+          crop.y,
+          crop.width,
+          crop.height,
+          0,
+          0,
+          crop.width,
+          crop.height
+        );
+
+        // Carregar o template
+        const templateImage = new Image();
+        templateImage.crossOrigin = "anonymous";
+        templateImage.src =
+          "https://github.com/mundodehads/mundodehads.github.io/blob/master/geradordecarteirinha/template.png";
+        templateImage.onload = () => {
+          const finalCanvas = document.createElement("canvas");
+          finalCanvas.width = templateImage.width;
+          finalCanvas.height = templateImage.height;
+          const finalCtx = finalCanvas.getContext("2d");
+
+          // Desenhar o template
+          finalCtx.drawImage(templateImage, 0, 0);
+
+          // Desenhar a imagem recortada no local específico
+          finalCtx.drawImage(
+            croppedCanvas,
+            0,
+            0,
+            croppedCanvas.width,
+            croppedCanvas.height,
+            30,
+            165,
+            140,
+            200
+          );
+
+          // Exibir e baixar automaticamente
+          const finalImageUrl = finalCanvas.toDataURL("image/png");
+          const printWindow = window.open("", "_blank");
+          printWindow.document.write(
+            `<img src="${finalImageUrl}" onload="window.print();">`
+          );
+        };
+      });
+    </script>
+  </body>
+</html>
