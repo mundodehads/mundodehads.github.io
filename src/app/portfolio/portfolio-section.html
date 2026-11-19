@@ -1,0 +1,31 @@
+<section aria-labelledby="portfolio-title" class="flex flex-col gap-8">
+  <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+    <h2 id="portfolio-title" class="font-pixel text-lg text-pink text-shadow-pink"># Portfolio</h2>
+    @if (languages().length > 1) {
+      <app-language-filter [languages]="languages()" [(selectedLanguage)]="selectedLanguage" />
+    }
+  </div>
+
+  @if (hasError()) {
+    <p class="border-2 border-danger bg-ink-900 p-5 font-mono text-sm text-danger" role="alert">
+      Could not load the repositories right now.
+      <a href="https://github.com/mundodehads" class="underline hover:text-neon">See them on GitHub</a>.
+    </p>
+  } @else if (isLoading() && projects().length === 0) {
+    <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" aria-busy="true" aria-label="Loading projects">
+      @for (skeletonSlot of skeletonSlots; track skeletonSlot) {
+        <li class="h-44 animate-pulse border-2 border-ink-800 bg-ink-900 motion-reduce:animate-none"></li>
+      }
+    </ul>
+  } @else {
+    <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" aria-live="polite">
+      @for (project of visibleProjects(); track project.url) {
+        <li>
+          <app-repository-card [project]="project" />
+        </li>
+      } @empty {
+        <li class="font-mono text-sm text-ink-400">No public projects yet.</li>
+      }
+    </ul>
+  }
+</section>

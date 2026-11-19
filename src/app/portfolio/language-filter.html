@@ -1,0 +1,21 @@
+<div role="group" aria-label="Filter projects by language" class="flex flex-wrap gap-3 font-mono text-xs">
+  <button
+    type="button"
+    [attr.aria-pressed]="selectedLanguage() === null"
+    (click)="selectedLanguage.set(null)"
+    class="min-h-11 border-2 border-ink-700 bg-ink-900 px-3 hover:border-neon aria-pressed:border-neon aria-pressed:text-neon"
+  >
+    All
+  </button>
+  @for (language of languages(); track language) {
+    <button
+      type="button"
+      [attr.aria-pressed]="selectedLanguage() === language"
+      (click)="selectedLanguage.set(language)"
+      class="flex min-h-11 items-center gap-2 border-2 border-ink-700 bg-ink-900 px-3 hover:border-neon aria-pressed:border-neon aria-pressed:text-neon"
+    >
+      <span aria-hidden="true" class="size-2.5" [class]="languageDotClass(language)"></span>
+      {{ language }}
+    </button>
+  }
+</div>

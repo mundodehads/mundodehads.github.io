@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "site",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["start"],
+      "port": 4200
+    },
+    {
+      "name": "published",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "4300"],
+      "port": 4300
+    }
+  ]
+}

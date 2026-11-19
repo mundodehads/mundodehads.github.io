@@ -1,0 +1,88 @@
+@theme {
+  --color-*: initial;
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-void: #04060b;
+  --color-ink-900: #0a0f1c;
+  --color-ink-800: #111a2e;
+  --color-ink-700: #23314f;
+  --color-ink-400: #8c9ab8;
+  --color-ink-100: #e6ecf8;
+  --color-neon: #00f3fe;
+  --color-neon-strong: #00c2cc;
+  --color-pink: #ff3df2;
+  --color-danger: #ff5d63;
+  --color-lang-typescript: #3178c6;
+  --color-lang-javascript: #f1e05a;
+  --color-lang-html: #e34c26;
+  --color-lang-css: #663399;
+  --color-lang-cpp: #f34b7d;
+  --color-lang-c: #a8b9cc;
+  --color-lang-java: #b07219;
+  --color-lang-python: #3572a5;
+  --color-lang-php: #4f5d95;
+  --color-lang-kotlin: #a97bff;
+  --color-lang-csharp: #178600;
+  --color-lang-shell: #89e051;
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-pixel: 'Press Start 2P', ui-monospace, monospace;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --shadow-pixel: 6px 6px 0 0 var(--color-black);
+  --shadow-pixel-sm: 3px 3px 0 0 var(--color-black);
+  --shadow-pixel-neon: 6px 6px 0 0 var(--color-neon);
+
+  --text-shadow-neon: 0 0 6px var(--color-neon), 0 0 18px var(--color-neon);
+  --text-shadow-pink: 0 0 6px var(--color-pink), 0 0 18px var(--color-pink);
+
+  --animate-blink: blink 1s steps(1) infinite;
+  --animate-rise: rise 400ms steps(4) both;
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    color: var(--color-ink-100);
+    background-color: var(--color-void);
+    background-image:
+      linear-gradient(var(--color-ink-900) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-ink-900) 1px, transparent 1px);
+    background-size: 32px 32px;
+    color-scheme: dark;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-neon);
+    outline-offset: 3px;
+  }
+
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+
+  ::selection {
+    color: var(--color-void);
+    background-color: var(--color-neon);
+  }
+}

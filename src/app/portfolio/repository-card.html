@@ -1,0 +1,20 @@
+@let currentProject = project();
+<a
+  [href]="currentProject.url"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="group flex h-full flex-col gap-4 border-2 border-ink-700 bg-ink-900 p-5 shadow-pixel transition-transform duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:border-neon hover:shadow-pixel-neon motion-reduce:transition-none"
+>
+  <h3 class="font-pixel text-xs leading-relaxed group-hover:text-neon">{{ currentProject.name }}</h3>
+  <p class="flex-1 text-sm leading-relaxed text-ink-400">{{ currentProject.description }}</p>
+  <div class="flex items-center gap-2 font-mono text-xs text-ink-400">
+    @if (currentProject.language; as language) {
+      <span aria-hidden="true" class="size-2.5" [class]="languageDotClass(language)"></span>
+      <span>{{ language }}</span>
+    }
+    <time class="ml-auto" [attr.datetime]="currentProject.lastPushedAt">
+      {{ currentProject.lastPushedAt | date: 'MMM y' : 'UTC' }}
+    </time>
+  </div>
+  <span class="sr-only">(opens in a new tab)</span>
+</a>

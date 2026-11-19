@@ -1,0 +1,28 @@
+<header class="flex animate-rise flex-col gap-6 motion-reduce:animate-none">
+  <p class="font-mono text-sm text-pink">&gt; whoami</p>
+  <app-name-typewriter />
+  <p class="max-w-2xl text-lg leading-relaxed">
+    Senior Software Engineer building cloud-native backends with
+    <strong class="text-neon">Node.js</strong>, <strong class="text-neon">TypeScript</strong> and
+    <strong class="text-neon">AWS</strong>, and AI-native tooling: agents, MCP servers and RAG.
+  </p>
+  <p class="font-mono text-sm text-ink-400">Londrina, Brazil · open to remote work</p>
+  <nav aria-label="Profiles">
+    <ul class="flex flex-wrap gap-4">
+      @for (socialLink of socialLinks; track socialLink.url) {
+        <li>
+          <a
+            [href]="socialLink.url"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex min-h-11 items-center gap-3 border-2 border-ink-700 bg-ink-900 px-4 py-2 font-mono text-sm shadow-pixel-sm transition-transform duration-150 hover:-translate-y-0.5 hover:border-neon hover:text-neon active:translate-y-0.5 active:shadow-none motion-reduce:transition-none"
+          >
+            <app-pixel-icon [name]="socialLink.icon" [size]="20" />
+            <span>{{ socialLink.label }}</span>
+            <span class="sr-only">(opens in a new tab)</span>
+          </a>
+        </li>
+      }
+    </ul>
+  </nav>
+</header>

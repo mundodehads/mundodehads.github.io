@@ -1,0 +1,41 @@
+{
+  "name": "mundodehads.github.io",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "^24.15.0"
+  },
+  "scripts": {
+    "start": "ng serve",
+    "build": "ng build && node scripts/publish.mjs",
+    "lint": "eslint .",
+    "check:standards": "node scripts/check-standards.mjs"
+  },
+  "overrides": {
+    "typescript": "$typescript"
+  },
+  "dependencies": {
+    "@angular/common": "^22.3.0",
+    "@angular/compiler": "^22.3.0",
+    "@angular/core": "^22.3.0",
+    "@angular/platform-browser": "^22.3.0",
+    "@angular/platform-server": "^22.3.0",
+    "@angular/ssr": "^22.3.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^22.3.0",
+    "@angular/cli": "^22.3.0",
+    "@angular/compiler-cli": "^22.3.0",
+    "@tailwindcss/postcss": "^4.3.5",
+    "@types/node": "^24.0.0",
+    "angular-eslint": "^22.8.0",
+    "eslint": "^10.14.0",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.3.5",
+    "typescript": "~6.0",
+    "typescript-eslint": "^8.72.1"
+  }
+}
